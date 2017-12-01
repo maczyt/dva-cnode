@@ -1,17 +1,55 @@
 import React from 'react';
 import { connect } from 'dva';
+import { Redirect, routerRedux } from 'dva/router';
+import { NavBar, Icon } from 'antd-mobile';
+import ItemList from '../components/ItemList';
 
-function IndexPage({ dispatch }) {
+import styles from './IndexPage.less';
+
+const TAB_TYPES = ['all', 'ask', 'share', 'job', 'good'];
+
+function IndexPage({ dispatch, accesstoken, location, activeType }) {
+  function changeType(type) {
+    if (type === activeType) return;
+    dispatch(routerRedux.replace({
+      pathname: `/${type}`,
+      state: { from: location },
+    }));
+  }
+  function logout() {
+    dispatch({ type: 'user/logout' });
+  }
   return (
-    <div>
-      <button onClick={() => { dispatch({ type: 'user/getUserInfo', payload: '7bb73eb6-a2c2-4157-9b9c-9424923eea01' }); }}>
-        Click Me
-      </button>
-    </div>
+    accesstoken ?
+      <div className={styles.wrapper}>
+        <NavBar mode="dark" rightContent={[<Icon key="0" type="ellipsis" onClick={logout} />]}>CNODE</NavBar>
+        <div className={styles.main}>
+          <ItemList />
+        </div>
+        <nav className={styles.nav}>
+          <ul>
+            {TAB_TYPES.map(type =>
+              <li key={type}>
+                <a className={activeType === type ? styles.active : ''} onClick={changeType.bind(this, type)}>{type}</a>
+              </li>
+            )}
+          </ul>
+        </nav>
+      </div> :
+      <Redirect
+        to={{
+          pathname: '/login',
+          state: { from: location },
+        }}
+      />
   );
 }
 
 IndexPage.propTypes = {
 };
 
-export default connect()(IndexPage);
+const mapStateToProps = ({ user: { accesstoken }, item: { activeType } }) => {
+  return { accesstoken, activeType };
+};
+
+export default connect(mapStateToProps)(IndexPage);

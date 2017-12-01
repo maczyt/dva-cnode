@@ -1,7 +1,7 @@
 import axios from '../utils/request';
 
-export function fetchIdsByType(type) {
-  return axios.get(`/api/topics?tab=${type}`);
+export function fetchItems(type, page) {
+  return axios.get(`/api/topics?tab=${type}&page=${page}`);
 }
 
 export function fetchItem(id) {
@@ -49,7 +49,9 @@ export function userDetail(username) {
 }
 // 验证 accessToken 的正确性
 export function checkAccessToken(accesstoken) {
-  return axios.post('/api/accesstoken', { accesstoken });
+  return axios.post('/api/accesstoken', { accesstoken })
+      .then(response => response)
+      .catch(err => { throw err; });
 }
 
 // 消息通知
