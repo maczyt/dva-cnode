@@ -20,10 +20,8 @@ function IndexPage({ dispatch, accesstoken, location, match, activeType }) {
     dispatch({ type: 'user/logout' });
   }
   function changePage(p) {
-    const { pathname } = location;
-    dispatch(routerRedux.push({
-      pathname: `${pathname}/${p}`,
-    }));
+    const { params: { type } } = match;
+    dispatch(routerRedux.push(`/${type}/${p}`));
   }
   const { params: { page = 1 } } = match;
   return (
