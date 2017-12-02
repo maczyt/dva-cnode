@@ -1,11 +1,19 @@
 import axios from '../utils/request';
 
 export function fetchItems(type, page) {
-  return axios.get(`/api/topics?tab=${type}&page=${page}`);
+  return axios.get(`/api/topics?mdrender=false&tab=${type}&page=${page}`);
+}
+
+export function fetchItemsComments(ids) {
+  return Promise.all(ids.map(id => fetchComments(id)));
+}
+
+export function fetchComments(id) {
+  return fetchItem(id);
 }
 
 export function fetchItem(id) {
-  return axios.get(`/api/topic/${id}`);
+  return axios.get(`/api/topic/${id}?mdrender=false`);
 }
 
 export function fetchCollect(username) {

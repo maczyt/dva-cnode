@@ -16,8 +16,10 @@
 
 ## todo
 
-- pagination
+- user info
+- ~~pagination~~
 - item page // important
+  - ~~content display~~
   - star
   - comment
 - ~~login~~

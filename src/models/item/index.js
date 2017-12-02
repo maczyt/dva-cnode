@@ -2,7 +2,7 @@ import pathToRegexp from 'path-to-regexp';
 
 import { 
   fetchItems,
-  fetchItem,
+  fetchComments,
 } from '../../services/cnode';
 
 const ITEMS_TYPE = [
@@ -22,6 +22,7 @@ export default {
       good: [],
     },
     itemsById: {},
+    commentsById: {},
   },
 
   subscriptions: {
@@ -52,6 +53,11 @@ export default {
       yield put({ type: 'saveList', payload: { ids, type } });
       yield put({ type: 'saveItems', payload: items.data.data });
     },
+    * fetchComments({ payload: id }, { put, call }) {
+      const datas = yield call(fetchComments, id);
+      const comments = { [id]: datas.data.data.replies };
+      yield put({ type: 'saveComments', payload: comments });
+    },
   },
   reducers: {
     saveList(state, { payload }) {
@@ -65,6 +71,9 @@ export default {
         return memo;
       }, {});
       return { ...state, itemsById: { ...state.itemsById, ...items } };
+    },
+    saveComments(state, { payload: comments }) {
+      return { ...state, commentsById: { ...state.commentsById, ...comments } };
     },
     saveActiveType(state, { payload: activeType }) {
       return { ...state, activeType };

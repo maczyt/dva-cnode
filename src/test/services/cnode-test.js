@@ -5,7 +5,7 @@ const {
   postItem,
 } = require('../../services/cnode');
 
-const accesstoken = '7bb73eb6-a2c2-4157-9b9c-9424923eea01';
+const accesstoken = '';
 
 describe('check access token', function() {
   it('should come back object', function() {
