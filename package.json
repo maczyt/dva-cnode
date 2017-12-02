@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "start": "roadhog server",
-    "build": "roadhog build",
+    "start": "cross-env API_ENV=dev roadhog server",
+    "build": "cross-env API_ENV=prod roadhog build",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint",
     "test": "mocha --require babel-register --recursive src/test/**/*-test.js"
@@ -30,6 +30,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
+    "cross-env": "^5.1.1",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",

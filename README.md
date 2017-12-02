@@ -17,6 +17,7 @@
 ## todo
 
 - user info
+- data loading
 - ~~pagination~~
 - item page // important
   - ~~content display~~

@@ -1,4 +1,4 @@
-{
+export default {
   "entry": "src/index.js",
   "env": {
     "development": {
@@ -33,5 +33,8 @@
       "changeOrigin": true,
       "pathRewrite": { "^/api" : "" }
     }
+  },
+  "define": {
+    "API_ENV": process.env.API_ENV
   }
 }
