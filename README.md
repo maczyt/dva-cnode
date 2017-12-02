@@ -10,6 +10,9 @@
 
 ## now
 
+[Live Demo](http://js-ninja.cn/dva-cnode)
+----
+
 ![login](./login.png)
 
 ![main](./main.png)
