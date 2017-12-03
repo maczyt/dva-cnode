@@ -20,10 +20,11 @@
 ## todo
 
 - user info
-- data loading
+- ~~data loading~~
 - ~~pagination~~
 - item page // important
   - ~~content display~~
+  - ~~comment display~~
   - star
   - comment
 - ~~login~~
