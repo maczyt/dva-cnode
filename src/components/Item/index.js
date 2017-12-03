@@ -2,6 +2,7 @@ import React from 'react';
 import Markdown from 'markdown-to-jsx';
 import { Card, NavBar, Icon, Badge } from 'antd-mobile';
 import moment from 'moment';
+import { CreateComment, CommentList } from '../Comment';
 import styles from './Item.less';
 
 moment.locale('zh-cn');
@@ -14,9 +15,9 @@ const TableWrap = ({ children, ...props }) => (
 );
 
 export default ({ item, history }) => {
-  const { content, title, top, author } = item;
+  const { content, title, top, author, id } = item;
   return (
-    <div>
+    <div style={{paddingBottom: '70px'}}>
       <NavBar
         mode={'light'}
         icon={<Icon type="left" />}
@@ -63,6 +64,9 @@ export default ({ item, history }) => {
         </Card.Body>
         <Card.Footer content={<p>创建于: {moment(item.create_at).fromNow()}</p>} extra={<p>最新回复: {moment(item.last_reply_at).fromNow()}</p>} />
       </Card>
+      <CommentList label="精彩评论" type="jc" id={id} />
+      <CommentList label="最新评论" type="zx" id={id} />
+      <CreateComment />
     </div>
   );
 };
