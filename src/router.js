@@ -11,7 +11,7 @@ function RouterConfig({ history }) {
       <Layout>
         <Switch>
           <Route path="/login" exact component={Login} />
-          <Route path="/item/:itemId" exact component={ItemPage} />
+          <Route path="/item/:itemId" component={ItemPage} />
           <Route path="/:type/:page?" component={IndexPage} />
           <Redirect from="/" to="/all" />
         </Switch>

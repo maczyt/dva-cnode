@@ -1,25 +1,23 @@
 import React from 'react';
 import NProgress from 'nprogress';
-import { connect } from 'dva';
 import 'nprogress/nprogress.css';
 
 let lastHref;
-const mapStateToProps = ({ loading }) => {
-  return { loading };
-};
 
-export default connect(mapStateToProps)(({ children, loading }) => {
+const Layout = ({ children }) => {
   const href = window.location.href;
   if (lastHref !== href) {
     NProgress.start();
-    if (!loading.global) {
+    setTimeout(() => {
       NProgress.done();
-    }
-    lastHref = href;
+      lastHref = href;
+    }, 1500);
   }
   return (
     <div>
       {children}
     </div>
   );
-});
+};
+
+export default Layout;
